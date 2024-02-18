@@ -1,6 +1,8 @@
 import conf from "../conf/conf/conf";
 import {Client, Account, ID} from "appwrite";
 
+// We can use this code for other projects as well for future projects.
+
 export class AuthService{
     client = new Client();
     account;
@@ -14,16 +16,16 @@ export class AuthService{
 
     async createAccount({email,password,name}){
         try{
-            await this.account.create(ID.unique(),email, password, name);
+            const userAccount = await this.account.create(ID.unique(),email, password, name);
             if(userAccount){
                 //call another method
-
+                return this.login({email,password});
             }else{
                 return userAccount;
             }
         }
         catch(err){
-            throw err;
+            throw new err;
         }
     }
     async login({email,password}){
@@ -31,7 +33,7 @@ export class AuthService{
             return await this.account.createEmailSession(email,password);
         }
         catch(error){
-            throw error;
+            throw new error;
         }
     }
 
