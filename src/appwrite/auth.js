@@ -1,4 +1,4 @@
-import conf from "../conf/conf/conf";
+import conf from "../conf/conf";
 import {Client, Account, ID} from "appwrite";
 
 // We can use this code for other projects as well for future projects.
